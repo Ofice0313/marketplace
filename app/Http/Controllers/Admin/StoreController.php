@@ -7,5 +7,9 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
-    //
+    public function index()
+    {
+        $stores = \App\Models\Store::paginate(10);
+        return view('admin.stores.index', compact('stores'));
+    }
 }
