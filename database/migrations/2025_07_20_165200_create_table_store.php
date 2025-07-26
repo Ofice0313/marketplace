@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('mobile_phone')->nullable();
             $table->string('slug')->unique();   
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
