@@ -23,7 +23,9 @@ class StoreController extends Controller
 
         $user = \App\Models\User::find($data['user']);
         $store = $user->store()->create($data);
-        return $store;
+        flash('success', 'Store created successfully.');
+
+        return redirect()->route('admin.stores.index');
     }
 
     public function edit($store){
@@ -34,10 +36,11 @@ class StoreController extends Controller
 
     public function update(Request $request, $store){
         $data = $request->all();
-        $store = \App\Models\Store::findOrFail($store);
+        $store = \App\Models\Store::find($store);
         $store->update($data);
+        flash('success', 'Store updated successfully.');
 
-        return $store;
+        return redirect()->route('admin.stores.index');
     }
 
     public function destroy($store)
@@ -45,6 +48,8 @@ class StoreController extends Controller
         $store = \App\Models\Store::find($store);
         $store->delete();
 
-        return redirect('/admin/stores');
+        flash('success', 'Store deleted successfully.');
+
+        return redirect()->route('admin.stores.index');
     }
 }
