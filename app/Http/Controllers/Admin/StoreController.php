@@ -25,4 +25,26 @@ class StoreController extends Controller
         $store = $user->store()->create($data);
         return $store;
     }
+
+    public function edit($store){
+        $store = \App\Models\Store::findOrFail($store);
+        
+        return view('admin.stores.edit', compact('store'));
+    }
+
+    public function update(Request $request, $store){
+        $data = $request->all();
+        $store = \App\Models\Store::findOrFail($store);
+        $store->update($data);
+
+        return $store;
+    }
+
+    public function destroy($store)
+    {
+        $store = \App\Models\Store::find($store);
+        $store->delete();
+
+        return redirect('/admin/stores');
+    }
 }
